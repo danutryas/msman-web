@@ -1,0 +1,65 @@
+@import "./prefix/colors";
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+    padding: 0 5%;
+    background-color: $bg-color;
+    align-items: center;
+    border-bottom: 1px solid $accent-color;
+    .header-link {
+        display: flex;
+        gap: 42px;
+        align-items: center;
+        a.home-link {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 28px;
+            font-family: 'Permanent Marker', cursive;
+            color: $primary-color;
+        }
+        .navbar {
+            display: flex;
+            list-style: none;
+            gap: 16px;
+            .nav-item {
+                display: flex;
+                align-items: center;
+                .nav-link {
+                    text-decoration: none;
+                    color: white;   
+                    font-size: 14px;
+                    font-weight: 300;
+                    &:hover {
+                        color: $neutral-color;
+                    }
+                    &.active {
+                        font-size: 16px;
+                        font-weight: 500;
+                        &:hover {
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .header-action {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        button {
+            border: none;
+            color: white;
+            background-color: transparent;
+            outline:none;
+            padding: 2px;
+        }
+    }
+}
