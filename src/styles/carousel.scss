@@ -1,0 +1,96 @@
+@import "./prefix/colors";
+
+.carousel {
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    gap: 12px;
+    .carousel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        .carousel-title {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .carousel-button {
+            color: $accent-color;
+            background-color: transparent;
+            padding: 0 8px;
+            font-weight: 600;
+        }
+    }
+    .carousel-body {
+        position: relative;
+        height: 100%;
+        &:hover .carousel-next,
+        &:hover .carousel-prev {
+            visibility: visible;
+        }
+        .carousel-prev {
+            visibility: hidden;
+            position: absolute;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            button {
+                height: 100%;
+                width: 38px;
+                background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+                color: white;
+                font-size: 32px;
+                &:hover {
+                    background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 100%);
+                    svg {
+                        transform: scale(1.1);
+                    }
+                }                
+                &:disabled {
+                    visibility: hidden;
+                }
+            }
+        }
+        .carousel-next {
+            visibility: hidden;
+            position: absolute;
+            height: 100%;
+            right: 0;
+            top: 0;
+            z-index: 1;
+            button {
+                height: 100%;
+                width: 38px;
+                background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+                color: white;
+                font-size: 32px;
+                &:hover {
+                    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+                    svg {
+                        transform: scale(1.1);
+                    }
+                }                
+                &:disabled {
+                    visibility: hidden;
+                }
+            }
+        }
+        .carousel-wrapper{
+            display: flex;
+            width: 100%;
+            overflow-x: scroll;
+            gap: 15px;
+            scroll-behavior: smooth;
+
+            // remove scrollbar
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+            &::-webkit-scrollbar {
+                display: none; /* Chrome, Safari and Opera */
+            }
+
+        }
+        
+    }
+}
