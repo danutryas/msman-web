@@ -26,9 +26,6 @@ export const WatchlistContextProvider = ({children} : contextProps) => {
             ]
         }))
     }
-    useEffect(() => {
-        console.log(watchlist)
-    },[watchlist])
     const addSeriesToWatchList = (objData : object) => {
         setWatchlist((watchlist: any) => ({
             ...watchlist,

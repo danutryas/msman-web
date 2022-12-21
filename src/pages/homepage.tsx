@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CarouselBuilder from "../components/carousel/Carousel";
 import '../styles/homepage.scss';
+import GenreContext from "../context/genreContext";
 
 const Homepage = () => {
     const initialValue = {
@@ -9,8 +10,8 @@ const Homepage = () => {
         nowPlayingMovies: [],
         popularMovies : [],
     };
-    
     const [homepageShow,setHomepageShow] = useState(initialValue);
+
     const getDiscoveryMovie = async () => {
         await fetch(`${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
