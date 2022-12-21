@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import {MovieCard, SeriesCard} from "../card/Card";
 import '../../styles/carousel.scss'
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
+import { Movie, Tv } from "../../interface/card";
+
 
 interface CarouselProps {
     movie? : Movie[]
@@ -15,6 +17,7 @@ const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
     const [isDisabledNext,setIsDisabledNext] = useState(false)
     const [isDisabledPrev,setIsDisabledPrev] = useState(false)
     const [totalCardPerRow,setTotalCardPerRow] = useState(0)
+
 
     useEffect(() => {
         if (wrapperRef.current) {
@@ -95,34 +98,3 @@ const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
 }
  
 export default Carousel;
-interface Movie {
-    id : number
-    poster_path? : string
-    backdrop_path? : string
-    genres : Array<Genre>
-    homepage? : string
-    original_title : string
-    release_date : string
-    runtime? : number
-    vote_average : number
-    title : string
-}
-interface Tv {
-    id : number
-    // poster_path? : string
-    // backdrop_path? : string
-    // genres : Array<Genre>
-    // homepage? : string
-    // original_title : string
-    // release_date : string
-    // runtime? : number
-    // vote_average : number
-    name : string
-    in_production : boolean
-    last_air_date : string
-    first_air_date : string
-}
-interface Genre {
-    id : number
-    name : string
-}

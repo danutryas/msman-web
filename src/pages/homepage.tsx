@@ -3,50 +3,64 @@ import CarouselBuilder from "../components/carousel/Carousel";
 import '../styles/homepage.scss';
 
 const Homepage = () => {
-    const [dataMovies,setDataMovies] = useState([])
-    const [dataSeries,setDataSeries] = useState([])
-    const [dataNowPlayingMovies,setDataNowPlayingMovies] = useState([])
-    const [dataPopularMovies,setDataPopularMovies] = useState([])
-    const [homepageShow,setHomepageShow] = useState({
-        discoveryMovie: dataMovies,
-        discoverySeries: dataSeries,
-        nowPlayingMovies: dataNowPlayingMovies ,
-        popularMovies : dataPopularMovies,
-    })
-    const getDiscoveryMovie = () => {
-        fetch(`${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}`)
+    const initialValue = {
+        discoveryMovie: [],
+        discoverySeries: [],
+        nowPlayingMovies: [],
+        popularMovies : [],
+    };
+
+    const [homepageShow,setHomepageShow] = useState(initialValue);
+    const getDiscoveryMovie = async () => {
+        await fetch(`${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
-            .then((response) => setDataMovies(response.results));
-    }
-    const getDiscoverySeries = () => {
-        fetch(`${process.env.REACT_APP_BASE_URL}/discover/tv?api_key=${process.env.REACT_APP_API_KEY}`)
+            .then((response) => {
+                setHomepageShow((homepageShow : any) => ({
+                    ...homepageShow,
+                    discoveryMovie : response.results
+                }))
+            });
+    };
+    const getDiscoverySeries = async () => {
+        await fetch(`${process.env.REACT_APP_BASE_URL}/discover/tv?api_key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
-            .then((response) => setDataSeries(response.results));
-    }
-    const getNowPlayingMovies = () => {
-        fetch(`${process.env.REACT_APP_BASE_URL}/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}`)
+            .then((response) => {
+                setHomepageShow((homepageShow : any) => ({
+                    ...homepageShow,
+                    discoverySeries : response.results
+                }))
+            });
+    };
+    const getNowPlayingMovies = async () => {
+        await fetch(`${process.env.REACT_APP_BASE_URL}/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
-            .then((response) => setDataNowPlayingMovies(response.results));
-    }
-    const getPopularMovies = () => {
-        fetch(`${process.env.REACT_APP_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`)
+            .then((response) => {
+                setHomepageShow((homepageShow : any) => ({
+                    ...homepageShow,
+                    nowPlayingMovies : response.results
+                }))
+            });
+    };
+    const getPopularMovies = async () => {
+        await fetch(`${process.env.REACT_APP_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
-            .then((response) => setDataPopularMovies(response.results));
-    }
+            .then((response) => {
+                setHomepageShow((homepageShow : any) => ({
+                    ...homepageShow,
+                    popularMovies : response.results
+                }))
+            });
+    };
     
 
     useEffect(() => {
         // fetch data
-        getDiscoveryMovie()
-        getDiscoverySeries()
-        getNowPlayingMovies()
-        getPopularMovies()
+        getDiscoveryMovie();
+        getDiscoverySeries();
+        getNowPlayingMovies();
+        getPopularMovies();
     },[])
 
-    useEffect(() => {
-        // update homepageShow
-        setHomepageShow({discoveryMovie : dataMovies,discoverySeries : dataSeries,nowPlayingMovies:dataNowPlayingMovies,popularMovies:dataPopularMovies})
-    },[dataMovies,dataSeries,setHomepageShow])
 
     return(
         <div className="Homepage" >
@@ -58,21 +72,3 @@ const Homepage = () => {
     )
 }
 export default Homepage;
-
-interface Movie {
-    id : number
-    poster_path? : string
-    backdrop_path? : string
-    genres : Array<Genre>
-    homepage? : string
-    original_title : string
-    release_date : string
-    runtime? : number
-    vote_average : number
-    title : string
-}
-
-interface Genre {
-    id : number
-    name : string
-}
