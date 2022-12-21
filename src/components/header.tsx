@@ -1,8 +1,28 @@
 import { AccountCircle, NotificationsNone, SearchRounded } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/header.scss';
 
 const Header = () => {
+    const location = useLocation()
+    const pathList = [
+        {
+            pathname : '/',
+            title : 'Home'
+        },
+        {
+            pathname : '/movie',
+            title : 'Movie'
+        },
+        {
+            pathname : '/series',
+            title : 'Series'
+        },
+        {
+            pathname : '/watchlist',
+            title : 'WatchList'
+        },
+    ]
+
     return(
         <header className="header" id="header">
             <div className="header-link">
@@ -10,12 +30,13 @@ const Header = () => {
                     <span>MSMan</span>
                 </a>
                 <ul className='navbar'>
-                    <li className='nav-item'>
-                        <Link to="/" className="nav-link active">Home</Link>
-                    </li>
-                    <li className='nav-item'><Link to="/movie" className="nav-link">Movie</Link></li>
-                    <li className='nav-item'><Link to="/series" className="nav-link">Series</Link></li>
-                    <li className='nav-item'><Link to="/watchlist" className="nav-link">WatchList</Link></li>
+                    {
+                        pathList.map((path,index) => {
+                            return(
+                                <li key={index} className={`nav-item `}><Link to={path.pathname} className={`nav-link ${location.pathname === path.pathname ? "active" : ""}`}>{path.title}</Link></li>
+                            )
+                        })
+                    }
                 </ul>
             </div>
             <div className="header-action">

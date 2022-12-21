@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
+import {  useContext, useState } from 'react';
 import '../../styles/card.scss'
 import {  Add, Check, FavoriteBorder, FavoriteOutlined,    Star,   StarBorderOutlined, } from '@mui/icons-material';
+import WatchlistContext from '../../context/watchlistContext';
 
 interface MovieProps {
     movie: any;
 }
 
 const MovieCard = ({movie}: MovieProps) => {
-
+    const {addMovieToWatchList} = useContext(WatchlistContext)
     const IMAGE_URL = process.env.REACT_APP_IMAGE_URL
-    const releaseYear = movie.release_date != undefined ? movie.release_date.slice(0,4) : 0
-    const movieRating = movie.vote_average != undefined ? movie.vote_average.toFixed(1) : 0.0
+    const releaseYear = movie.release_date !== undefined ? movie.release_date.slice(0,4) : 0
+    const movieRating = movie.vote_average !== undefined ? movie.vote_average.toFixed(1) : 0.0
  
     const [isFavorited,setIsFavorited] = useState(false)
     const [isRated,setIsRated] = useState(false)
@@ -22,8 +23,9 @@ const MovieCard = ({movie}: MovieProps) => {
     const giveRatingToMovie = () => {
         setIsRated(prev => !prev)
     }
-    const addMovieToWatchlist = () => {
+    const addMovieToWatchlist = (movie : any) => {
         setIsWatchlist(prev => !prev)
+        addMovieToWatchList(movie)
     }    
 
     return ( 
@@ -63,7 +65,7 @@ const MovieCard = ({movie}: MovieProps) => {
                     </div>
                 </div>
                 <div className="card-action">
-                    <button onClick={addMovieToWatchlist}>
+                    <button onClick={() => addMovieToWatchlist(movie)}>
                         {isWatchlist ? <Check fontSize='inherit' />:<Add  fontSize='inherit'/>}
                         <span>Watchlist</span>
                     </button>
@@ -76,10 +78,11 @@ interface SeriesProps {
     tv: any;
 }
 const SeriesCard = ({tv}: SeriesProps) => {
+    const {addSeriesToWatchList} = useContext(WatchlistContext)
 
     const IMAGE_URL = process.env.REACT_APP_IMAGE_URL
-    const firstReleaseYear = tv.first_air_date != undefined ? tv.first_air_date.slice(0,4) : 0
-    const movieRating = tv.vote_average != undefined ? tv.vote_average.toFixed(1) : 0.0
+    const firstReleaseYear = tv.first_air_date !== undefined ? tv.first_air_date.slice(0,4) : 0
+    const movieRating = tv.vote_average !== undefined ? tv.vote_average.toFixed(1) : 0.0
  
     const [isFavorited,setIsFavorited] = useState(false)
     const [isRated,setIsRated] = useState(false)
@@ -91,8 +94,9 @@ const SeriesCard = ({tv}: SeriesProps) => {
     const giveRatingToMovie = () => {
         setIsRated(prev => !prev)
     }
-    const addMovieToWatchlist = () => {
+    const addMovieToWatchlist = (series : any) => {
         setIsWatchlist(prev => !prev)
+        addSeriesToWatchList(series)
     }    
 
     return ( 
@@ -132,7 +136,7 @@ const SeriesCard = ({tv}: SeriesProps) => {
                     </div>
                 </div>
                 <div className="card-action">
-                    <button onClick={addMovieToWatchlist}>
+                    <button onClick={() => addMovieToWatchlist(tv)}>
                         {isWatchlist ? <Check fontSize='inherit' />:<Add  fontSize='inherit'/>}
                         <span>Watchlist</span>
                     </button>
