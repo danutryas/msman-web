@@ -57,7 +57,7 @@ const initialValueRated : UserRated = {
         total_results : 0
     },
 }
-const initialValue : UserAccount = {
+export const initialValueAccount : UserAccount = {
     details : initialValueDetails,
     watchlist : initialValueWatchlist,
     favorite : initialValueFavorite,
@@ -65,89 +65,100 @@ const initialValue : UserAccount = {
 }
 
 
-export const AccountProvider = ({children} : contextProps) => {
-    const [account,setAccount] = useState(initialValue)
 
+export const AccountProvider = ({children} : contextProps) => {
+    const [account,setAccount] = useState(initialValueAccount)
+    const [sid,setSid]  = useState('')
     
     const addWatchList = async ( data : WatchlistBody) => {
         try {
-            const sid = window.localStorage.getItem('sid')
             const response = await axios.post(`/account/${account.details.id}/watchlist`,data,{params :{session_id : sid}})
-            console.log(response)
         }catch (e) {
             console.log(e)
         }
     }
-    const removeWatchList = async () => {
-        // const sid = window.localStorage.getItem('sid')
-        // const response = await axios.get("/account/:account_id/watchlist",{params :{session_id : sid}})
-        // console.log(response)
-    }
     const addFavorite = async (data : FavoriteBody) => {
-        const sid = window.localStorage.getItem('sid')
         const response = await axios.post(`/account/${account.details.id}/favorite`,data,{params :{session_id : sid}})
         console.log(response)
     }
-    const removeFavorite = async () => {
-        // const sid = window.localStorage.getItem('sid')
-        // const response = await axios.get("/account/:account_id/watchlist",{params :{session_id : sid}})
-        // console.log(response)
-    }
     const addRated = async () => {
-        // const sid = window.localStorage.getItem('sid')
         // const response = await axios.get("/account/:account_id/watchlist",{params :{session_id : sid}})
         // console.log(response)
     }
     const removeRated = async () => {
-        // const sid = window.localStorage.getItem('sid')
         // const response = await axios.get("/account/:account_id/watchlist",{params :{session_id : sid}})
         // console.log(response)
     }
+    const getWatchlist = async (sid : String |  null) => {
+        try {
+            const watchlistTv = await axios.get(`/account/${account.details.id}/watchlist/tv`,{params :{session_id : sid}})
+            const watchlistMovies = await axios.get(`/account/${account.details.id}/watchlist/movies`,{params :{session_id : sid}})
+            setAccount((account : UserAccount) => ({
+                ...account,
+                watchlist : {
+                    tv : watchlistTv.data,
+                    movies : watchlistMovies.data
+                }
+            }))
+        }catch (e: any) {
+            console.log(e)
+        }
+    }
+    const getFavorite = async (sid : String |  null) => {
+        try {
+            const favoriteTv = await axios.get(`/account/${account.details.id}/favorite/tv`,{params :{session_id : sid}})
+            const favoriteMovies = await axios.get(`/account/${account.details.id}/favorite/movies`,{params :{session_id : sid}})
+            setAccount((account : UserAccount) => ({
+                ...account,
+                favorite : {
+                    tv : favoriteTv.data,
+                    movies : favoriteMovies.data
+                }
+            }))
+        }catch (e: any) {
+            console.log(e)
+        }
+    }
+    const getRated = async (sid : String |  null) => {
+        try {
+            const ratedMovies = await axios.get(`/account/${account.details.id}/rated/movies`,{params :{session_id : sid}})
+            setAccount((account : UserAccount) => ({
+                ...account,
+                rated : {
+                    ...account.rated,
+                    movies : ratedMovies.data,
+                },
+            }))
+        }catch (e: any) {
+            console.log(e)
+        }
+    }
+    const getUserAccount = async (sid : String | null) => {
+        try {
+            const details = await axios.get("/account",{params :{session_id : sid}})
+            setAccount((acc: UserAccount) => ({
+                ...acc,
+                details : details.data,
+            }))
 
-
-    const getUserAccount = async (session : String | null) => {
-        if (session !== null) {
-            try {
-                const details = await axios.get("/account",{params :{session_id : session}})
-                const watchlistTv = await axios.get(`/account/${details.data.id}/watchlist/tv`,{params :{session_id : session}})
-                const watchlistMovies = await axios.get(`/account/${details.data.id}/watchlist/movies`,{params :{session_id : session}})
-                const favoriteTv = await axios.get(`/account/${details.data.id}/favorite/tv`,{params :{session_id : session}})
-                const favoriteMovies = await axios.get(`/account/${details.data.id}/favorite/movies`,{params :{session_id : session}})
-                const ratedMovies = await axios.get(`/account/${details.data.id}/rated/movies`,{params :{session_id : session}})
-                setAccount((acc: any) => ({
-                    ...acc,
-                    details : details.data,
-                    watchlist : {
-                        tv : watchlistTv.data,
-                        movies : watchlistMovies.data,
-                    },
-                    favorite : {
-                        tv: favoriteTv.data,
-                        movies: favoriteMovies.data,
-                    },
-                    rated : {
-                        ...acc.rated,
-                        movies : ratedMovies.data,
-                    },
-                }))
-            } catch (e : any) {
-                console.log(e.response)
-            }
+        } catch (e : any) {
+            console.log(e)
         }
     }
 
     useEffect(() => {
         const sid = window.localStorage.getItem('sid')
+        setSid(sid ? sid : "")
         getUserAccount(sid)
+        getWatchlist(sid)
+        getFavorite(sid)
+        getRated(sid)
     },[])
 
 
+
     return(
-        <UserAccountContext.Provider value={{account,setAccount,addWatchList,removeWatchList,
-            addFavorite,
-            removeFavorite,
-            addRated,
-            removeRated,}}>
+        <UserAccountContext.Provider value={{account,setAccount,addWatchList,addFavorite,addRated,getUserAccount,getWatchlist,getFavorite,getRated}}>
             {children}
         </UserAccountContext.Provider>
     )

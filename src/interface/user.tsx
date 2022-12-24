@@ -5,11 +5,12 @@ export interface UserAccountContextProps {
     account : UserAccount
     setAccount : Dispatch<SetStateAction<UserAccount>>
     addWatchList : (data : WatchlistBody) => void
-    removeWatchList : () => void
     addFavorite : (data : FavoriteBody) => void
-    removeFavorite : () => void
     addRated : () => void
-    removeRated : () => void
+    getUserAccount : (sid : String | null) => void
+    getWatchlist: (sid : String | null) => void
+    getFavorite: (sid : String | null) => void
+    getRated: (sid : String | null) => void
 }
 
 export interface UserAccount {

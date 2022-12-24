@@ -1,45 +1,80 @@
-import {  useContext, useState } from 'react';
+import {  useContext, useEffect, useState } from 'react';
 import '../../styles/card.scss'
 import {  Add, Check, FavoriteBorder, FavoriteOutlined,    Star,   StarBorderOutlined, } from '@mui/icons-material';
 import WatchlistContext from '../../context/watchlistContext';
-import UserAccountContext from '../../context/Account';
+import UserAccountContext, { initialValueAccount } from '../../context/Account';
+import { Movie, Tv } from '../../interface/card';
+import AuthContext from '../../context/Auth';
+import axios from '../../API/axios';
 
 interface MovieProps {
-    movie: any;
+    movie: Movie;
+}
+interface SeriesProps {
+    tv: Tv;
 }
 
 const MovieCard = ({movie}: MovieProps) => {
-    const {addWatchList,addFavorite,addRated} = useContext(UserAccountContext);
+    // context import
+    const {auth} = useContext(AuthContext)
+    const {account,addWatchList,addFavorite,addRated,getUserAccount,getWatchlist,getFavorite} = useContext(UserAccountContext);
+    
+    // data manipulation
     const IMAGE_URL = process.env.REACT_APP_IMAGE_URL
     const releaseYear = movie.release_date !== undefined ? movie.release_date.slice(0,4) : 0
     const movieRating = movie.vote_average !== undefined ? movie.vote_average.toFixed(1) : 0.0
     
-
+    // state 
     const [isFavorited,setIsFavorited] = useState(false)
     const [isRated,setIsRated] = useState(false)
     const [isWatchlist,setIsWatchlist] = useState(false)
 
+    // function
     const addMovieToFavorite = () => {
         setIsFavorited(prev => !prev)
         addFavorite({
             media_type : "movie",
             media_id : movie.id,
-            favorite : true,
+            favorite : !isFavorited,
         })
+        getFavorite(auth.sessionId)
     }
     const giveRatingToMovie = () => {
         setIsRated(prev => !prev)
     }
     const addMovieToWatchlist = () => {
         setIsWatchlist(prev => !prev)
-        // addMovieToWatchList(movie)
-        console.log(movie.id)
         addWatchList({
             media_type : "movie",
             media_id : movie.id,
-            watchlist : true,
+            watchlist : !isWatchlist,
         })
+        getWatchlist(auth.sessionId)
     }    
+
+    useEffect(() => {
+        if (account !== initialValueAccount) {
+            let data = account.watchlist.movies.results
+            data.map((mov : Movie) => {
+                if (mov.id === movie.id){
+                    setIsWatchlist(true)
+                }
+            })
+            data = account.favorite.movies.results
+            data.map((mov : Movie) => {
+                if (mov.id === movie.id){
+                    setIsFavorited(true)
+                }
+            })
+            data = account.rated.movies.results
+            data.map((mov : Movie) => {
+                if (mov.id === movie.id){
+                    setIsRated(true)
+                }
+            })
+        }
+    },[])
+
 
     return ( 
         <div className="card">
@@ -87,39 +122,67 @@ const MovieCard = ({movie}: MovieProps) => {
         </div>
     );
 }
-interface SeriesProps {
-    tv: any;
-}
-const SeriesCard = ({tv}: SeriesProps) => {
-    const {addSeriesToWatchList} = useContext(WatchlistContext)
-    const {addWatchList,addFavorite,addRated} = useContext(UserAccountContext);
 
+const SeriesCard = ({tv}: SeriesProps) => {
+    // import contextAPI
+    const {auth} = useContext(AuthContext)
+    const {account,addWatchList,addFavorite,addRated,getWatchlist,getFavorite} = useContext(UserAccountContext);
+
+    // data manipulation 
     const IMAGE_URL = process.env.REACT_APP_IMAGE_URL
     const firstReleaseYear = tv.first_air_date !== undefined ? tv.first_air_date.slice(0,4) : 0
     const movieRating = tv.vote_average !== undefined ? tv.vote_average.toFixed(1) : 0.0
  
+    // state
     const [isFavorited,setIsFavorited] = useState(false)
     const [isRated,setIsRated] = useState(false)
     const [isWatchlist,setIsWatchlist] = useState(false)
 
+    // function
     const addMovieToFavorite = () => {
         setIsFavorited(prev => !prev)
         addFavorite({
             media_type : "tv",
             media_id : tv.id,
-            favorite : true,
-        })
+            favorite : !isFavorited,
+        });
+        getFavorite(auth.sessionId);
     }
     const giveRatingToMovie = () => {
         setIsRated(prev => !prev)
     }
-    const addMovieToWatchlist = (series : any) => {
+    const addMovieToWatchlist = () => {
+        setIsWatchlist(prev => !prev)
         addWatchList({
             media_type : "tv",
             media_id : tv.id,
-            watchlist : true,
-        })
+            watchlist : !isWatchlist,
+        });
+        getWatchlist(auth.sessionId);
     }    
+
+    useEffect(() => {
+        if (account !== initialValueAccount) {
+            let data = account.watchlist.tv.results
+            data.map((series : Tv) => {
+                if (series.id === tv.id){
+                    setIsWatchlist(true)
+                }
+            })
+            data = account.favorite.tv.results
+            data.map((series : Tv) => {
+                if (series.id === tv.id){
+                    setIsFavorited(true)
+                }
+            })
+            data = account.rated.tv.results
+            data.map((series : Tv) => {
+                if (series.id === tv.id){
+                    setIsRated(true)
+                }
+            })
+        }
+    },[])
 
     return ( 
         <div className="card">
