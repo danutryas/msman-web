@@ -5,8 +5,6 @@ const MovieContext = createContext(null)
 
 export const MovieContextProvider = ({children} : contextProps) => {
 
-
-
     return(
         <MovieContext.Provider value={null}>
             {children}

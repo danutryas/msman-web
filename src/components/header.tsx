@@ -18,8 +18,8 @@ const Header = () => {
             title : 'Series'
         },
         {
-            pathname : '/watchlist',
-            title : 'WatchList'
+            pathname : '/list',
+            title : 'List'
         },
     ]
 

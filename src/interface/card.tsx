@@ -26,6 +26,7 @@ export interface Tv {
     number_of_seasons : number
     seasons : Array<Season>
 }
+
 export interface Genre {
     id : number
     name : string

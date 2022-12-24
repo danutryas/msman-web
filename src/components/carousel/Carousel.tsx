@@ -58,43 +58,43 @@ const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
     }
     return ( 
         <div className="carousel" style={{display:"flex"}}>
-            <div className="carousel-header">
-                <h3 className="carousel-title">{title}</h3>
-                <button className="carousel-button">Find More</button>
+        <div className="carousel-header">
+            <h3 className="carousel-title">{title}</h3>
+            <button className="carousel-button">Find More</button>
+        </div>
+        <div className="carousel-body">
+            <div className="carousel-prev">
+                <button onClick={onPrev} disabled={isDisabledPrev}>
+                    <ArrowBackIosNew fontSize="inherit" />
+                </button>
             </div>
-            <div className="carousel-body">
-                <div className="carousel-prev">
-                    <button onClick={onPrev} disabled={isDisabledPrev}>
-                        <ArrowBackIosNew fontSize="inherit" />
-                    </button>
-                </div>
-                <div className="carousel-wrapper" ref={wrapperRef}>
-                    {   type === "movie" && movie && movie.length > 0 ?
-                        movie.map((show,index) => {
-                            return(
-                                <MovieCard key={index} movie={show} />
+            <div className="carousel-wrapper" ref={wrapperRef}>
+                {   type === "movie" && movie && movie.length > 0 ?
+                    movie.map((show,index) => {
+                        return(
+                            <MovieCard key={index} movie={show} />
                             )
                         })
                         : ""
-                    }
-                    {   type === "tv" && tv && tv.length > 0 ?
-                        tv.map((show,index) => {
-                            return(
-                                <SeriesCard key={index} tv={show} />
+                }
+                {   type === "tv" && tv && tv.length > 0 ?
+                    tv.map((show,index) => {
+                        return(
+                            <SeriesCard key={index} tv={show} />
                             )
-                        })
-                        : ""
-                    }
-                    
-                </div>
-                <div className="carousel-next">
-                    <button onClick={onNext} disabled={isDisabledNext}>
-                        <ArrowForwardIos fontSize="inherit"/>
-                    </button>
-                </div>
+                    })
+                    : ""
+                }
+                
+            </div>
+            <div className="carousel-next">
+                <button onClick={onNext} disabled={isDisabledNext}>
+                    <ArrowForwardIos fontSize="inherit"/>
+                </button>
             </div>
         </div>
+    </div>
     );
 }
- 
+
 export default Carousel;
