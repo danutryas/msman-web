@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import CarouselBuilder from "../components/carousel/Carousel";
+import Carousel from "../components/carousel/Carousel";
 import '../styles/homepage.scss';
 import GenreContext from "../context/genreContext";
 import axios from "../API/axios";
@@ -66,10 +66,10 @@ const Homepage = () => {
 
     return(
         <div className="body-content" >
-            <CarouselBuilder movie={homepageShow.nowPlayingMovies} title="Now Playing" />
-            <CarouselBuilder movie={homepageShow.popularMovies} title="Popular"/>
-            <CarouselBuilder movie={homepageShow.discoveryMovie} title="Movie Discovery"/>
-            <CarouselBuilder tv={homepageShow.discoverySeries} title="Series Discovery" type="tv"/>
+            <Carousel movie={homepageShow.nowPlayingMovies} title="Now Playing" />
+            <Carousel movie={homepageShow.popularMovies} title="Popular"/>
+            <Carousel movie={homepageShow.discoveryMovie} title="Movie Discovery"/>
+            <Carousel tv={homepageShow.discoverySeries} title="Series Discovery" type="tv"/>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CarouselBuilder from "../components/carousel/Carousel";
+import Carousel from "../components/carousel/Carousel";
 
 const MoviesPage = () => {
     const initialValue = {
@@ -72,11 +72,11 @@ const MoviesPage = () => {
 
     return (
         <div className="body-content">
-            <CarouselBuilder movie={moviespageShow.nowPlaying} title="Now Playing" />
-            <CarouselBuilder movie={moviespageShow.upcoming} title="Upcoming" />
-            <CarouselBuilder movie={moviespageShow.topRated} title="Top Rated" />
-            <CarouselBuilder movie={moviespageShow.popular} title="Popular" />
-            <CarouselBuilder movie={moviespageShow.discovery} title="Discovery" />
+            <Carousel movie={moviespageShow.nowPlaying} title="Now Playing" />
+            <Carousel movie={moviespageShow.upcoming} title="Upcoming" />
+            <Carousel movie={moviespageShow.topRated} title="Top Rated" />
+            <Carousel movie={moviespageShow.popular} title="Popular" />
+            <Carousel movie={moviespageShow.discovery} title="Discovery" />
         </div>
     )
 }

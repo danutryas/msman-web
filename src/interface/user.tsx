@@ -2,22 +2,17 @@ import { Dispatch, SetStateAction } from "react"
 import { Movie, Tv } from "./card"
 
 export interface UserAccountContextProps {
-    account : UserAccount
-    setAccount : Dispatch<SetStateAction<UserAccount>>
-    addWatchList : (data : WatchlistBody) => void
-    addFavorite : (data : FavoriteBody) => void
-    addRated : () => void
-    getUserAccount : (sid : String | null) => void
-    getWatchlist: (sid : String | null) => void
-    getFavorite: (sid : String | null) => void
-    getRated: (sid : String | null) => void
+    account : DetailsAccount
+    setAccount : Dispatch<SetStateAction<DetailsAccount>>
+    getUserAccount : () => void
 }
-
-export interface UserAccount {
-    details : DetailsAccount
-    watchlist : UserWatchlist
-    favorite : UserFavorite
-    rated : UserRated
+export interface UserListContextProps {
+    userWatchlist : UserWatchlist
+    setUserWatchlist : Dispatch<SetStateAction<UserWatchlist>>
+    userFavorite : UserFavorite
+    setUserFavorite : Dispatch<SetStateAction<UserFavorite>>
+    getWatchlist : () => void
+    getFavorite : () => void
 }
 
 export interface UserWatchlist {
@@ -63,4 +58,57 @@ export interface FavoriteBody {
     media_type: String,
     media_id: number,
     favorite: boolean
+}
+
+export const initialValueDetailsAccount : DetailsAccount = {
+    avatar : {},
+    id: 0,
+    iso_639_1: "",
+    iso_3166_1: "",
+    name: "",
+    include_adult: false,
+    username: "",
+}
+
+export const initialValueWatchlist : UserWatchlist = {
+    movies : {
+        page : 0,
+        results : [],
+        total_pages : 0,
+        total_results : 0
+    },
+    tv : {
+        page : 0,
+        results : [],
+        total_pages : 0,
+        total_results : 0
+    },
+}
+export const initialValueFavorite : UserFavorite = {
+    movies : {
+        page : 0,
+        results : [],
+        total_pages : 0,
+        total_results : 0
+    },
+    tv : {
+        page : 0,
+        results : [],
+        total_pages : 0,
+        total_results : 0
+    },
+}
+export const initialValueRated : UserRated = {
+    movies : {
+        page : 0,
+        results : [],
+        total_pages : 0,
+        total_results : 0
+    },
+    tv : {
+        page : 0,
+        results : [],
+        total_pages : 0,
+        total_results : 0
+    },
 }
