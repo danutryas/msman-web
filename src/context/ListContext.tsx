@@ -60,8 +60,8 @@ export const UserListProvider = ({children} : contextProps) => {
     // }
     
     // react-query hooks to trigger data fetching     
-    useQuery('user-watchlist',getWatchlist,{enabled : !!auth.sessionId && !!accountId, refetchOnWindowFocus : true})
-    useQuery('user-favorite',getFavorite,{enabled : !!auth.sessionId && !!accountId, refetchOnWindowFocus : true})
+    useQuery('user-watchlist',getWatchlist,{enabled : !!auth.sessionId && !!accountId,refetchOnMount : true, refetchOnWindowFocus : true})
+    useQuery('user-favorite',getFavorite,{enabled : !!auth.sessionId && !!accountId,refetchOnMount : true, refetchOnWindowFocus : true})
 
     return(
         <UserListContext.Provider value={{userWatchlist, setUserWatchlist,userFavorite, setUserFavorite,getWatchlist,getFavorite,}}>

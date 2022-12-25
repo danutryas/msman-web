@@ -100,6 +100,9 @@ const MovieCard = ({movie}: MovieProps) => {
         <div className="card">
             <div className="card-image">
                 <img src={`${process.env.REACT_APP_IMAGE_URL}` + movie.poster_path} className="image-poster"/>
+                <div className="card-type">
+                    <p>movie</p>
+                </div>
                 <div className="add-favorite" onClick={addMovieToFavorite}>
                     <div className="bookmark-wrapper">
                         <svg width="28" height="36" viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -18,6 +18,20 @@
             height: 100%;
             object-fit: cover;
         }
+        .card-type {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            background-color: rgba($bg-color,0.9);
+            border-radius: 8px;
+            
+            p { 
+                padding: 2px 8px;
+                font-size: 10px;
+                font-weight: 600;
+                color: $accent-color;
+            }
+        }
         .add-favorite {
             position: absolute;
             top: 0;
