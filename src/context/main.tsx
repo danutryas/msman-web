@@ -5,6 +5,7 @@ import { WatchlistContextProvider } from "./watchlistContext";
 import { GenreContextProvider } from "./genreContext";
 import { AuthProvider } from "./Auth";
 import { AccountProvider } from "./Account";
+import { UserListProvider } from "./ListContext";
 
 export interface contextProps {
     children : ReactNode
@@ -14,15 +15,17 @@ const ContextWrapper = ({children}: contextProps) => {
     return(
         <AuthProvider>
             <AccountProvider>
-                <GenreContextProvider>
-                    <MovieContextProvider>
-                        <SeriesContextProvider>
-                            <WatchlistContextProvider>
-                                {children}
-                            </WatchlistContextProvider>
-                        </SeriesContextProvider>
-                    </MovieContextProvider>
-                </GenreContextProvider>
+                <UserListProvider>
+                    <GenreContextProvider>
+                        <MovieContextProvider>
+                            <SeriesContextProvider>
+                                <WatchlistContextProvider>
+                                    {children}
+                                </WatchlistContextProvider>
+                            </SeriesContextProvider>
+                        </MovieContextProvider>
+                    </GenreContextProvider>
+                </UserListProvider>
             </AccountProvider>
         </AuthProvider>
     )

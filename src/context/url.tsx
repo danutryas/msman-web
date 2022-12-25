@@ -3,5 +3,9 @@ export const url = {
         createTokenNew : "/authentication/token/new",
         createTokenLogin : "/authentication/token/validate_with_login",
         createSession : "/authentication/session/new",
+    },
+    account : {
+        details : '/account',
+        
     }
 }
