@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import Carousel from "../components/carousel/Carousel";
+import { initialValueTvList } from "../interface/series";
 
 const SeriesPage = () => {
-    const initialValue = {
-        discovery: [],
-        popular : [],
-        topRated : [],
-        airingToday: [],
-    };
-    const [seriespageShow,setSeriespageShow] = useState(initialValue);
+    const [seriespageShow,setSeriespageShow] = useState(initialValueTvList);
+    
     const getDiscoverySeries = async () => {
         await fetch(`${process.env.REACT_APP_BASE_URL}/discover/tv?api_key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
@@ -56,7 +52,6 @@ const SeriesPage = () => {
         getTopRatedSeries()
         getAiringTodaySeries()
     },[])
-
 
     return (
         <div className="body-content">

@@ -2,11 +2,11 @@ import {  useContext, useEffect, useState } from 'react';
 import '../../styles/card.scss'
 import {  Add, Check, FavoriteBorder, FavoriteOutlined, Star, StarBorderOutlined} from '@mui/icons-material';
 import UserAccountContext from '../../context/Account';
-import { Movie} from '../../interface/card';
 import UserListContext from '../../context/ListContext';
 import { FavoriteBody, WatchlistBody } from '../../interface/user';
 import axios from '../../API/axios';
 import AuthContext from '../../context/Auth';
+import { Movie } from '../../interface/movie';
 
 interface MovieProps {
     movie: Movie;

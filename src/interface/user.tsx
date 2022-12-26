@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
-import { Movie, Tv } from "./card"
+import { Tv } from "./series"
+import { Movie } from "./movie"
 
 export interface UserAccountContextProps {
     account : DetailsAccount

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { contextProps } from "./main";
-import { Genre } from "../interface/card";
+import { Genre } from "../interface/show";
 
 interface genreContextProps {
     genres : Array<Genre>

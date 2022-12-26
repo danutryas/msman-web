@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import '../../styles/carousel.scss'
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
-import { Movie, Tv } from "../../interface/card";
 import MovieCard from "../card/MovieCard";
 import SeriesCard from "../card/SeriesCard";
+import { Movie } from "../../interface/movie";
+import { Tv } from "../../interface/series";
 
 
 interface CarouselProps {
@@ -19,7 +20,6 @@ const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
     const [isDisabledPrev,setIsDisabledPrev] = useState(false)
     const [totalCardPerRow,setTotalCardPerRow] = useState(0)
 
-
     useEffect(() => {
         if (wrapperRef.current) {
             setTotalCardPerRow(Math.floor(wrapperRef.current.clientWidth / 165));
@@ -30,31 +30,10 @@ const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
         if (wrapperRef.current) {
             wrapperRef.current.scrollLeft -=  (totalCardPerRow * 165) ;
         }
-        // checkDisabledButton();
     }
     const onNext = () => {
         if (wrapperRef.current) {
             wrapperRef.current.scrollLeft +=  (totalCardPerRow * 165)
-        }
-        // checkDisabledButton();
-    }
-    const checkDisabledButton = () => {
-        if (wrapperRef.current) {
-            let scrollLeft = wrapperRef.current.scrollLeft;
-            let offsetWidth = wrapperRef.current.offsetWidth;
-            let scrollWidth = wrapperRef.current.scrollWidth;
-            
-            if (scrollLeft + offsetWidth >= scrollWidth){
-                setIsDisabledNext(() => true)
-            }else {
-                setIsDisabledNext(() => false)
-            }
-
-            if (scrollLeft <= 0){
-                setIsDisabledPrev(() => true)
-            }else {
-                setIsDisabledPrev(() => false)
-            }
         }
     }
     return ( 

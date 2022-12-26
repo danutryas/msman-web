@@ -7,6 +7,9 @@ import UserListContext from "../context/ListContext";
 const ListPage = () => {
     const { account } = useContext(UserAccountContext)
     const { userFavorite, userWatchlist } = useContext(UserListContext)
+
+    
+
     return(
         <div className="body-content">
             <Carousel title="Watchlist Movie" movie={userWatchlist.movies.results}/>
