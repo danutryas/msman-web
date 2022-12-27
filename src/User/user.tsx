@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
-import { Tv } from "./series"
-import { Movie } from "./movie"
+import { Tv } from "../Series/seriesInterface"
+import { Movie } from "../Movie/movieInterface"
 
 export interface UserAccountContextProps {
     account : DetailsAccount

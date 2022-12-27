@@ -1,5 +1,5 @@
 import { createContext, useEffect, useMemo, useState } from "react";
-import { contextProps } from "./main";
+import { contextProps } from "./ContextWrapper";
 import { Genre } from "../interface/show";
 
 interface genreContextProps {

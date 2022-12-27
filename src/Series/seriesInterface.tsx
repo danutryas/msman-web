@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
-import { Genre } from "./show"
+import { Genre } from "../interface/show"
 export interface SeriesContextProps {
     seriesList : SeriesList
     setSeriesList : Dispatch<SetStateAction<SeriesList>>

@@ -1,4 +1,4 @@
-import { Genre } from "./show"
+import { Genre } from "../interface/show"
 
 export interface Movie {
     id : number

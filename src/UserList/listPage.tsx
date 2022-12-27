@@ -1,14 +1,13 @@
 import { useContext } from "react";
-import Carousel from "../components/carousel/Carousel";
-import WatchlistContext from "../context/watchlistContext";
-import UserAccountContext from "../context/Account";
-import UserListContext from "../context/ListContext";
+import Carousel from "../components/Carousel";
+import UserAccountContext from "../User/Account";
+import UserListContext from "./ListContext";
 
 const ListPage = () => {
     const { account } = useContext(UserAccountContext)
     const { userFavorite, userWatchlist } = useContext(UserListContext)
 
-    
+
 
     return(
         <div className="body-content">

@@ -1,12 +1,12 @@
 import {  useContext, useEffect, useState } from 'react';
-import '../../styles/card.scss'
+import '../styles/card.scss'
 import {  Add, Check, FavoriteBorder, FavoriteOutlined,    Star,   StarBorderOutlined, } from '@mui/icons-material';
-import UserAccountContext from '../../context/Account';
-import AuthContext from '../../context/Auth';
-import UserListContext from '../../context/ListContext';
-import { FavoriteBody, WatchlistBody } from '../../interface/user';
-import axios from '../../API/axios';
-import { Tv } from '../../interface/series';
+import UserAccountContext from '../User/Account';
+import AuthContext from '../Auth/Auth';
+import UserListContext from '../UserList/ListContext';
+import { FavoriteBody, WatchlistBody } from '../User/user';
+import axios from '../API/axios';
+import { Tv } from './seriesInterface';
 
 interface SeriesProps {
     tv: Tv;

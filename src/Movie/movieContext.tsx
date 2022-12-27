@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState } from "react";
-import { contextProps } from "./main";
+import { contextProps } from "../context/ContextWrapper";
 
 const MovieContext = createContext(null)
 

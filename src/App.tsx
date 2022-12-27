@@ -1,13 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
 import Header from './components/header';
-import Homepage from './pages/homepage';
-import MoviesPage from './pages/MoviesPage';
-import ListPage from './pages/listPage';
-import SeriesPage from './pages/SeriesPage';
-import LoginPage from './pages/login';
+import Homepage from './Homepage/homepage';
+import MoviesPage from './Movie/MoviesPage';
+import ListPage from './UserList/listPage';
+import SeriesPage from './Series/SeriesPage';
+import LoginPage from './Login/login';
 import { useContext } from 'react';
-import AuthContext from './context/Auth';
+import AuthContext from './Auth/Auth';
 
 function App() {
   const {auth} = useContext(AuthContext)

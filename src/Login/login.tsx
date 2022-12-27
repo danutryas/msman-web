@@ -1,9 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import '../styles/login.scss'
-import axios from '../API/axios';
-import { url } from '../context/url';
-import { LoginAccount, requestToken } from '../interface/auth';
-import AuthContext from '../context/Auth';
+import { useContext } from 'react';
+import './login.scss'
+import AuthContext from '../Auth/Auth';
 
 
 const LoginPage =  () => {

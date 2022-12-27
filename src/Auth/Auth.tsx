@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
-import { contextProps } from "./main";
-import { Auth, AuthContextProps, LoginAccount, requestToken } from "../interface/auth";
+import { contextProps } from "../context/ContextWrapper";
+import { Auth, AuthContextProps, LoginAccount, requestToken } from "./authInterface";
 import axios from "../API/axios";
-import { url } from "./url";
+import { url } from "../url";
 
 const AuthContext = createContext({} as AuthContextProps)
 

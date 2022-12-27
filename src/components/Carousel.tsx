@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
-import '../../styles/carousel.scss'
+import '../styles/carousel.scss'
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
-import MovieCard from "../card/MovieCard";
-import SeriesCard from "../card/SeriesCard";
-import { Movie } from "../../interface/movie";
-import { Tv } from "../../interface/series";
+import MovieCard from "../Movie/MovieCard";
+import SeriesCard from "../Series/SeriesCard";
+import { Movie } from "../Movie/movieInterface";
+import { Tv } from "../Series/seriesInterface";
 
 
 interface CarouselProps {
