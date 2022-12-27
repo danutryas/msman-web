@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 import '../styles/carousel.scss'
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import MovieCard from "../Movie/MovieCard";

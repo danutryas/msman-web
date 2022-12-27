@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState, useTransition } from "react";
+import { createContext, useContext,  useState } from "react";
 import { contextProps } from "../context/ContextWrapper";
-import { DetailsAccount, FavoriteBody, UserAccountContextProps, UserFavorite, UserRated, UserWatchlist, WatchlistBody, initialValueDetailsAccount } from "./user";
+import {  UserAccountContextProps, initialValueDetailsAccount } from "./user";
 import AuthContext from "../Auth/Auth";
 import axios from "../API/axios";
 import { useQuery } from "react-query";

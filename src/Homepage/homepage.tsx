@@ -1,9 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Carousel from "../components/Carousel";
-import '../styles/homepage.scss';
-import GenreContext from "../context/genreContext";
-import axios from "../API/axios";
-import AuthContext from "../Auth/Auth";
+import './homepage.scss';
 
 const Homepage = () => {
     const initialValue = {

@@ -84,6 +84,7 @@ const MovieCard = ({movie}: MovieProps) => {
                     isWatchlist : true
                 }))
             }
+            return "";
         })
         const fv = userFavorite?.movies.results
         fv.map((mov : Movie) => {
@@ -93,13 +94,14 @@ const MovieCard = ({movie}: MovieProps) => {
                     isFavorited : true
                 }))
             }
+            return "";
         })
-    },[userWatchlist,userFavorite])
+    },[userWatchlist,userFavorite,movie])
 
     return ( 
         <div className="card">
             <div className="card-image">
-                <img src={`${process.env.REACT_APP_IMAGE_URL}` + movie.poster_path} className="image-poster"/>
+                <img src={`${process.env.REACT_APP_IMAGE_URL}` + movie.poster_path} className="image-poster" alt={movie.title}/>
                 <div className="card-type">
                     <p>movie</p>
                 </div>

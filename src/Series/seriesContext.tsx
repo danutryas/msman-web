@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState } from "react";
-import { SeriesContextProps, initialValueTv, initialValueTvList } from "./seriesInterface";
+import { SeriesContextProps, initialValueTvList } from "./seriesInterface";
 import axios from "../API/axios";
 import { useQuery } from "react-query";
 

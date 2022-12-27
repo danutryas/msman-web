@@ -84,6 +84,7 @@ const SeriesCard = ({tv}: SeriesProps) => {
                     isWatchlist : true
                 }))
             }
+            return "";
         })
         const fv = userFavorite?.tv.results
         fv.map((series : Tv) => {
@@ -93,13 +94,14 @@ const SeriesCard = ({tv}: SeriesProps) => {
                     isFavorited : true
                 }))
             }
+            return "";
         })
-    },[userWatchlist,userFavorite])
+    },[userWatchlist,userFavorite,tv])
     
     return ( 
         <div className="card">
             <div className="card-image">
-                <img src={`${process.env.REACT_APP_IMAGE_URL}` + tv.poster_path} className="image-poster"/>
+                <img src={`${process.env.REACT_APP_IMAGE_URL}` + tv.poster_path} className="image-poster" alt={tv.name}/>
                 <div className="card-type">
                     <p>series</p>
                 </div>

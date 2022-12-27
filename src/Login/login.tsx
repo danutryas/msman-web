@@ -4,7 +4,7 @@ import AuthContext from '../Auth/Auth';
 
 
 const LoginPage =  () => {
-    const {LoginAccount,setLoginAccount,login} = useContext(AuthContext)
+    const {setLoginAccount,login} = useContext(AuthContext)
     
     const onChangeInput = (e : any) => {
         setLoginAccount((account: any) => ({
