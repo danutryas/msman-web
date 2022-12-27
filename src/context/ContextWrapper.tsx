@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { MovieContextProvider } from "../Movie/movieContext";
 import { SeriesContextProvider } from "../Series/seriesContext";
-import { GenreContextProvider } from "./genreContext";
+import { GenreContextProvider } from "../genre/genreContext";
 import { AuthProvider } from "../Auth/Auth";
 import { AccountProvider } from "../User/Account";
 import { UserListProvider } from "../UserList/ListContext";

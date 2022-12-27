@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
-import { Genre } from "../interface/show"
+import { Genre } from "../genre/genreInterface"
 export interface MovieContextProps {
     movieList : MovieList
     setMovieList : Dispatch<SetStateAction<MovieList>>
