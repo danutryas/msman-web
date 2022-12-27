@@ -4,7 +4,7 @@ import {  UserAccountContextProps, initialValueDetailsAccount } from "./user";
 import AuthContext from "../Auth/Auth";
 import axios from "../API/axios";
 import { useQuery } from "react-query";
-import { url } from "../url";
+import { url } from "../API/url";
 
 const UserAccountContext = createContext({} as UserAccountContextProps)
 

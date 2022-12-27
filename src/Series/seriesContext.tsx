@@ -2,39 +2,37 @@ import { ReactNode, createContext, useState } from "react";
 import { SeriesContextProps, initialValueTvList } from "./seriesInterface";
 import axios from "../API/axios";
 import { useQuery } from "react-query";
+import { url } from "../API/url";
+import { contextProps } from "../context/ContextWrapper";
 
 const SeriesContext = createContext({} as SeriesContextProps)
-
-interface contextProps {
-    children : ReactNode
-}
 
 export const SeriesContextProvider = ({children} : contextProps) => {
     const [seriesList,setSeriesList] = useState(initialValueTvList)
     
     const getDiscoverySeries = async () => {
-        const discovery = await axios.get('/discover/tv')
+        const discovery = await axios.get(url.tv.discover)
         setSeriesList((seriesList) => ({
             ...seriesList,
             discovery : discovery.data.results
         }))
     }
     const getPopularSeries = async () => {
-        const popular = await axios.get('/tv/popular')
+        const popular = await axios.get(url.tv.popular)
         setSeriesList((seriesList) => ({
             ...seriesList,
             popular : popular.data.results
         }))
     }
     const getTopRatedSeries = async () => {
-        const discovery = await axios.get('/tv/top_rated')
+        const topRated = await axios.get(url.tv.topRated)
         setSeriesList((seriesList) => ({
             ...seriesList,
-            topRated : discovery.data.results
+            topRated : topRated.data.results
         }))
     }
     const getAiringTodaySeries = async () => {
-        const airingToday = await axios.get('/tv/airing_today')
+        const airingToday = await axios.get(url.tv.airingToday)
         setSeriesList((seriesList) => ({
             ...seriesList,
             airingToday : airingToday.data.results
