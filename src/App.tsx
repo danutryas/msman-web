@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/header';
 import Homepage from './Homepage/homepage';
 import MoviesPage from './Movie/MoviesPage';
@@ -26,6 +26,7 @@ function App() {
           </>
         ) : (
           <Routes>
+            {/* <Route path="/" element={<Navigate to="/login"/>} /> */}
             <Route path="/login" element={<LoginPage />} />
           </Routes>
         )

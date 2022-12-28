@@ -9,15 +9,13 @@ export interface LoginAccount {
 export interface requestToken {
     expires_at : String ;
     request_token : String;
-    success : String;
+    success : Boolean;
 }
 export interface AuthContextProps {
     auth  : Auth
     setAuth : Dispatch<SetStateAction<Auth>>
     LoginAccount : LoginAccount
     setLoginAccount : Dispatch<SetStateAction<LoginAccount>>
-    requestToken : requestToken
-    setRequestToken : Dispatch<SetStateAction<requestToken>>
     login : (e : any) => Promise<void>
 }
 
