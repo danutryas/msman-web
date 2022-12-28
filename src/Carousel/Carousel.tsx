@@ -1,5 +1,5 @@
 import {  useEffect, useRef, useState } from "react";
-import '../styles/carousel.scss'
+import './carousel.scss'
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import MovieCard from "../Movie/MovieCard";
 import SeriesCard from "../Series/SeriesCard";
@@ -14,7 +14,7 @@ interface CarouselProps {
     type? : String
 }
 
-const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
+const CarouselWithHeader = ({movie,tv,title,type = "movie"}:CarouselProps) => {
     const wrapperRef = useRef<HTMLDivElement>(null)
     const [isDisabledNext,setIsDisabledNext] = useState(false)
     const [isDisabledPrev,setIsDisabledPrev] = useState(false)
@@ -77,4 +77,4 @@ const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
     );
 }
 
-export default Carousel;
+export default CarouselWithHeader;

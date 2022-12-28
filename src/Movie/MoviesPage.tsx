@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Carousel from "../components/Carousel";
+import Carousel from "../Carousel/Carousel";
 import MovieContext from "./movieContext";
 
 const MoviesPage = () => {

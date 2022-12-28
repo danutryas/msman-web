@@ -1,5 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import Header from './components/header';
+import {  Route, Routes } from 'react-router-dom';
+import Header from './Header/header';
 import Homepage from './Homepage/homepage';
 import MoviesPage from './Movie/MoviesPage';
 import ListPage from './UserList/listPage';

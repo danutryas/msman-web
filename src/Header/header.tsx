@@ -1,6 +1,6 @@
 import { AccountCircle, NotificationsNone, SearchRounded } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
-import '../styles/header.scss';
+import './header.scss';
 
 const Header = () => {
     const location = useLocation()
