@@ -1,72 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import Carousel from "../components/Carousel";
 import './homepage.scss';
+import MovieContext from "../Movie/movieContext";
+import SeriesContext from "../Series/seriesContext";
 
 const Homepage = () => {
-    const initialValue = {
-        discoveryMovie: [],
-        discoverySeries: [],
-        nowPlayingMovies: [],
-        popularMovies : [],
-    };
-    const [homepageShow,setHomepageShow] = useState(initialValue);
-    const getDiscoveryMovie = async () => {
-        await fetch(`${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}`)
-            .then((response) => response.json())
-            .then((response) => {
-                setHomepageShow((homepageShow : any) => ({
-                    ...homepageShow,
-                    discoveryMovie : response.results
-                }))
-            });
-    };
-    const getDiscoverySeries = async () => {
-        await fetch(`${process.env.REACT_APP_BASE_URL}/discover/tv?api_key=${process.env.REACT_APP_API_KEY}`)
-            .then((response) => response.json())
-            .then((response) => {
-                setHomepageShow((homepageShow : any) => ({
-                    ...homepageShow,
-                    discoverySeries : response.results
-                }))
-            });
-    };
-    const getNowPlayingMovies = async () => {
-        await fetch(`${process.env.REACT_APP_BASE_URL}/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}`)
-            .then((response) => response.json())
-            .then((response) => {
-                setHomepageShow((homepageShow : any) => ({
-                    ...homepageShow,
-                    nowPlayingMovies : response.results
-                }))
-            });
-    };
-    const getPopularMovies = async () => {
-        await fetch(`${process.env.REACT_APP_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`)
-            .then((response) => response.json())
-            .then((response) => {
-                setHomepageShow((homepageShow : any) => ({
-                    ...homepageShow,
-                    popularMovies : response.results
-                }))
-            });
-    };
-
-
-    useEffect(() => {
-        // fetch data
-        getDiscoveryMovie();
-        getDiscoverySeries();
-        getNowPlayingMovies();
-        getPopularMovies();
-    },[])
-
+    const {movieList} = useContext(MovieContext)
+    const {seriesList} = useContext(SeriesContext)
 
     return(
         <div className="body-content" >
-            <Carousel movie={homepageShow.nowPlayingMovies} title="Now Playing" />
-            <Carousel movie={homepageShow.popularMovies} title="Popular"/>
-            <Carousel movie={homepageShow.discoveryMovie} title="Movie Discovery"/>
-            <Carousel tv={homepageShow.discoverySeries} title="Series Discovery" type="tv"/>
+            <Carousel movie={movieList.upcoming} title="Upcoming Movies"/>
+            <Carousel movie={movieList.popular} title="Popular Movies"/>
+            <Carousel tv={seriesList.popular} title="Popular Series" type="tv"/>
+            <Carousel movie={movieList.topRated} title="Top Rated Movies"/>
+            <Carousel tv={seriesList.topRated} title="Top Rated Series" type="tv"/>
+            <Carousel movie={movieList.nowPlaying} title="Now Playing Movies" />
+            <Carousel tv={seriesList.airingToday} title="Series Discovery" type="tv"/>
+            <Carousel movie={movieList.discovery} title="Movie Discovery"/>
+            <Carousel tv={seriesList.discovery} title="Series Discovery" type="tv"/>
         </div>
     )
 }

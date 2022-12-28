@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import {  createContext, useState } from "react";
 import { SeriesContextProps, initialValueTvList } from "./seriesInterface";
 import axios from "../API/axios";
 import { useQuery } from "react-query";
