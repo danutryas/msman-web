@@ -1,10 +1,8 @@
-import {  useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import './carousel.scss'
-import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
-import MovieCard from "../Movie/MovieCard";
-import SeriesCard from "../Series/SeriesCard";
 import { Movie } from "../Movie/movieInterface";
 import { Tv } from "../Series/seriesInterface";
+import CarouselBuilder from "./CarouselBuilder";
 
 
 interface CarouselProps {
@@ -13,68 +11,52 @@ interface CarouselProps {
     title : String
     type? : String
 }
-
-const CarouselWithHeader = ({movie,tv,title,type = "movie"}:CarouselProps) => {
-    const wrapperRef = useRef<HTMLDivElement>(null)
-    const [isDisabledNext,setIsDisabledNext] = useState(false)
-    const [isDisabledPrev,setIsDisabledPrev] = useState(false)
-    const [totalCardPerRow,setTotalCardPerRow] = useState(0)
-
-    useEffect(() => {
-        if (wrapperRef.current) {
-            setTotalCardPerRow(Math.floor(wrapperRef.current.clientWidth / 165));
-        }
-    },[])
-
-    const onPrev = () => {
-        if (wrapperRef.current) {
-            wrapperRef.current.scrollLeft -=  (totalCardPerRow * 165) ;
-        }
-    }
-    const onNext = () => {
-        if (wrapperRef.current) {
-            wrapperRef.current.scrollLeft +=  (totalCardPerRow * 165)
-        }
-    }
+export const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
     return ( 
         <div className="carousel" style={{display:"flex"}}>
-        <div className="carousel-header">
-            <h3 className="carousel-title">{title}</h3>
-            <button className="carousel-button">Find More</button>
+            <div className="carousel-header">
+                <h3 className="carousel-title">{title}</h3>
+                <button className="carousel-button">Find More</button>
+            </div>
+            <CarouselBuilder data={movie || tv} type={type} />
         </div>
-        <div className="carousel-body">
-            <div className="carousel-prev">
-                <button onClick={onPrev} disabled={isDisabledPrev}>
-                    <ArrowBackIosNew fontSize="inherit" />
-                </button>
-            </div>
-            <div className="carousel-wrapper" ref={wrapperRef}>
-                {   type === "movie" && movie && movie.length > 0 ?
-                    movie.map((show,index) => {
-                        return(
-                            <MovieCard key={index} movie={show} />
-                            )
-                        })
-                        : ""
-                }
-                {   type === "tv" && tv && tv.length > 0 ?
-                    tv.map((show,index) => {
-                        return(
-                            <SeriesCard key={index} tv={show} />
-                            )
-                    })
-                    : ""
-                }
-                
-            </div>
-            <div className="carousel-next">
-                <button onClick={onNext} disabled={isDisabledNext}>
-                    <ArrowForwardIos fontSize="inherit"/>
-                </button>
-            </div>
-        </div>
-    </div>
     );
 }
 
-export default CarouselWithHeader;
+export interface BuilderConfig {
+    data : any[]
+    title : String
+    cardType : String
+}
+interface CarouselOptionProps {
+    title : String
+    config : BuilderConfig[]
+}
+
+export const CarouselOption = ({config,title}:CarouselOptionProps) => {
+    const [activeConfig,setActiveConfig] = useState(config[0])
+
+    useEffect(() => {
+        setActiveConfig(config[0])
+    },[config])
+
+    return (
+        <div className="carousel" style={{display:"flex"}}>
+            <div className="carousel-header">
+                <div className="left-header">
+                    <h3 className="carousel-title">{title}</h3>
+                    <div className="carousel-option">
+                        {
+                            config.map((config,index) => (
+                                <button className={activeConfig.title === config.title ? "active":""} key={index} onClick={() => setActiveConfig(config)}>{config.title}</button>
+                            ))
+                        }
+                    </div>
+                </div>
+                <button className="carousel-button">Find More</button>
+            </div>
+            <CarouselBuilder data={activeConfig.data} type={activeConfig.cardType} />
+        </div>
+    );
+}
+

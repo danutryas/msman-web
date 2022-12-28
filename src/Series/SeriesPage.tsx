@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Carousel from "../Carousel/Carousel";
+import {Carousel} from "../Carousel/Carousel";
 import SeriesContext from "./seriesContext";
 
 const SeriesPage = () => {
