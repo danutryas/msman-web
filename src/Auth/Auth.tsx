@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { contextProps } from "../context/ContextWrapper";
-import { Auth, AuthContextProps, LoginAccount, requestToken } from "./authInterface";
+import { IAuth, AuthContextProps, ILoginAccount } from "./authInterface";
 import axios from "../API/axios";
 import { url } from "../API/url";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,11 @@ import { useQuery } from "react-query";
 
 const AuthContext = createContext({} as AuthContextProps)
 
-const initialState : Auth = {
+const initialState : IAuth = {
     isAuth : false,
     sessionId : ""
 }
-const initialStateAcc : LoginAccount = {
+const initialStateAcc : ILoginAccount = {
     username : "",
     password : "",
     request_token : ""

@@ -1,26 +1,26 @@
 import { Dispatch, SetStateAction } from "react"
-import { Genre } from "../genre/genreInterface"
+import { IGenre } from "../genre/genreInterface"
 export interface SeriesContextProps {
-    seriesList : SeriesList
-    setSeriesList : Dispatch<SetStateAction<SeriesList>>
+    seriesList : ISeriesList
+    setSeriesList : Dispatch<SetStateAction<ISeriesList>>
 }
-export interface SeriesList {
-    discovery: Array<Tv>,
-    popular : Array<Tv>,
-    topRated : Array<Tv>,
-    airingToday: Array<Tv>,
+export interface ISeriesList {
+    discovery: Array<ITv>,
+    popular : Array<ITv>,
+    topRated : Array<ITv>,
+    airingToday: Array<ITv>,
 }
-export const initialValueTvList : SeriesList = {
+export const initialValueTvList : ISeriesList = {
     discovery: [],
     popular : [],
     topRated : [],
     airingToday: [],
 }
-export interface Tv {
+export interface ITv {
     id : number
     poster_path? : string
     backdrop_path? : string
-    genres : Array<Genre>
+    genres : Array<IGenre>
     homepage? : string
     original_name : string
     vote_average : number
@@ -30,9 +30,9 @@ export interface Tv {
     first_air_date : string
     number_of_episodes : number
     number_of_seasons : number
-    seasons : Array<Season>
+    seasons : Array<ISeason>
 }
-export const initialValueTv = { 
+export const initialValueTv : ITv = { 
     id : 0,
     poster_path : "",
     backdrop_path : "",
@@ -48,7 +48,7 @@ export const initialValueTv = {
     number_of_seasons : 0,
     seasons : [],
 }
-export interface Season {
+export interface ISeason {
     air_date : string,
     episode_count : number,
     id : number,
@@ -56,7 +56,7 @@ export interface Season {
     overview : string,
     season_number : number
 }
-export const initialValueSeason = {
+export const initialValueSeason : ISeason = {
     air_date : "",
     episode_count : 0,
     id : 0,

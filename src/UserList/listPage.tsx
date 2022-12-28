@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { CarouselOption} from "../Carousel/Carousel";
 import UserListContext from "./ListContext";
-import { Tv } from "../Series/seriesInterface";
 
 const ListPage = () => {
     const { userFavorite, userWatchlist } = useContext(UserListContext)

@@ -1,16 +1,16 @@
 
 export interface genreContextProps {
-  genres: GenreList
+  genres: IGenreList
 }
-export interface GenreList {
-  movie : Array<Genre>
-  tv : Array<Genre>
+export interface IGenre {
+  id : number
+  name : string
+}
+export interface IGenreList {
+  movie : Array<IGenre>
+  tv : Array<IGenre>
 }
 export const initialValueGenreList = {
   movie : [],
   tv : [],
-}
-export interface Genre {
-  id : number
-  name : string
 }

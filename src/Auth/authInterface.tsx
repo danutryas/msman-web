@@ -1,25 +1,20 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface LoginAccount {
+export interface ILoginAccount {
     username : String;
     password : String;
     request_token : String;
 }
 
-export interface requestToken {
-    expires_at : String ;
-    request_token : String;
-    success : Boolean;
-}
 export interface AuthContextProps {
-    auth  : Auth
-    setAuth : Dispatch<SetStateAction<Auth>>
-    LoginAccount : LoginAccount
-    setLoginAccount : Dispatch<SetStateAction<LoginAccount>>
+    auth  : IAuth
+    setAuth : Dispatch<SetStateAction<IAuth>>
+    LoginAccount : ILoginAccount
+    setLoginAccount : Dispatch<SetStateAction<ILoginAccount>>
     login : (e : any) => Promise<void>
 }
 
-export interface Auth {
+export interface IAuth {
     isAuth : boolean
     sessionId : string
 }

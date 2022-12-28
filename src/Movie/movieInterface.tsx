@@ -1,28 +1,28 @@
 import { Dispatch, SetStateAction } from "react"
-import { Genre } from "../genre/genreInterface"
+import { IGenre } from "../genre/genreInterface"
 export interface MovieContextProps {
-    movieList : MovieList
-    setMovieList : Dispatch<SetStateAction<MovieList>>
+    movieList : IMovieList
+    setMovieList : Dispatch<SetStateAction<IMovieList>>
 }
-export interface MovieList {
-    discovery: Array<Movie>,
-    popular : Array<Movie>,
-    topRated : Array<Movie>,
-    upcoming: Array<Movie>,
-    nowPlaying: Array<Movie>,
+export interface IMovieList {
+    discovery: Array<IMovie>,
+    popular : Array<IMovie>,
+    topRated : Array<IMovie>,
+    upcoming: Array<IMovie>,
+    nowPlaying: Array<IMovie>,
 }
-export const initialValueMovieList : MovieList = {
+export const initialValueMovieList : IMovieList = {
     discovery: [],
     nowPlaying: [],
     popular : [],
     topRated : [],
     upcoming : [],
 }
-export interface Movie {
+export interface IMovie {
     id : number
     poster_path? : string
     backdrop_path? : string
-    genres : Array<Genre>
+    genres : Array<IGenre>
     homepage? : string
     original_title : string
     release_date : string

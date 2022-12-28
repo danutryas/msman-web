@@ -6,10 +6,10 @@ import UserListContext from '../UserList/ListContext';
 import { FavoriteBody, WatchlistBody } from '../User/user';
 import axios from '../API/axios';
 import AuthContext from '../Auth/Auth';
-import { Movie } from './movieInterface';
+import { IMovie } from './movieInterface';
 
 interface MovieProps {
-    movie: Movie;
+    movie: IMovie;
 }
 
 const MovieCard = ({movie}: MovieProps) => {
@@ -77,7 +77,7 @@ const MovieCard = ({movie}: MovieProps) => {
 
     useEffect(() => {
         const wl = userWatchlist?.movies.results
-        wl.map((mov : Movie) => {
+        wl.map((mov : IMovie) => {
             if (mov.id === movie.id){
                 setCardStatus((prev) => ({
                     ...prev,
@@ -87,7 +87,7 @@ const MovieCard = ({movie}: MovieProps) => {
             return "";
         })
         const fv = userFavorite?.movies.results
-        fv.map((mov : Movie) => {
+        fv.map((mov : IMovie) => {
             if (mov.id === movie.id){
                 setCardStatus((prev) => ({
                     ...prev,

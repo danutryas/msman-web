@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import './carousel.scss'
-import { Movie } from "../Movie/movieInterface";
-import { Tv } from "../Series/seriesInterface";
+import { IMovie } from "../Movie/movieInterface";
+import { ITv } from "../Series/seriesInterface";
 import CarouselBuilder from "./CarouselBuilder";
 
 
 interface CarouselProps {
-    movie? : Movie[]
-    tv? :  Tv[]
+    movie? : IMovie[]
+    tv? :  ITv[]
     title : String
     type? : String
 }
@@ -15,7 +15,9 @@ export const Carousel = ({movie,tv,title,type = "movie"}:CarouselProps) => {
     return ( 
         <div className="carousel" style={{display:"flex"}}>
             <div className="carousel-header">
-                <h3 className="carousel-title">{title}</h3>
+                <div className="left-header">
+                    <h3 className="carousel-title">{title}</h3>
+                </div>
                 <button className="carousel-button">Find More</button>
             </div>
             <CarouselBuilder data={movie || tv} type={type} />

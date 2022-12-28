@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
-import { Tv } from "../Series/seriesInterface"
-import { Movie } from "../Movie/movieInterface"
+import { ITv } from "../Series/seriesInterface"
+import { IMovie } from "../Movie/movieInterface"
 
 export interface UserAccountContextProps {
     account : DetailsAccount
@@ -40,13 +40,13 @@ export interface DetailsAccount {
 }
 export interface ListMovieAccount {
     page : number
-    results : Array<Movie>
+    results : Array<IMovie>
     total_pages : number
     total_results : number
 }
 export interface ListTvAccount {
     page : number
-    results : Array<Tv>
+    results : Array<ITv>
     total_pages : number
     total_results : number
 }

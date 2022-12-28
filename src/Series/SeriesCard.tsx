@@ -6,10 +6,10 @@ import AuthContext from '../Auth/Auth';
 import UserListContext from '../UserList/ListContext';
 import { FavoriteBody, WatchlistBody } from '../User/user';
 import axios from '../API/axios';
-import { Tv } from './seriesInterface';
+import { ITv } from './seriesInterface';
 
 interface SeriesProps {
-    tv: Tv;
+    tv: ITv;
 }
 
 const SeriesCard = ({tv}: SeriesProps) => {
@@ -77,7 +77,7 @@ const SeriesCard = ({tv}: SeriesProps) => {
 
     useEffect(() => {
         const wl = userWatchlist?.tv.results
-        wl.map((series : Tv) => {
+        wl.map((series : ITv) => {
             if (series.id === tv.id){
                 setCardStatus((prev) => ({
                     ...prev,
@@ -87,7 +87,7 @@ const SeriesCard = ({tv}: SeriesProps) => {
             return "";
         })
         const fv = userFavorite?.tv.results
-        fv.map((series : Tv) => {
+        fv.map((series : ITv) => {
             if (series.id === tv.id){
                 setCardStatus((prev) => ({
                     ...prev,
